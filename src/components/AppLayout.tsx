@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { LogOut, Menu, X } from 'lucide-react'
+import { LogOut, Menu, X, LayoutDashboard, Settings } from 'lucide-react'
 
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
 
@@ -29,7 +29,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
     <div className="min-h-screen flex" style={{ backgroundColor: 'var(--color-bg)' }}>
       <aside className="hidden md:flex flex-col w-60 border-r" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)' }}>
         <div className="h-16 flex items-center px-6 border-b" style={{ borderColor: 'var(--color-border)' }}>
-          <Link to="/dashboard" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <span className="text-lg font-bold" style={{ color: 'var(--color-primary)' }}>StockFlow</span>
             <span className="text-xs font-semibold px-1.5 py-0.5 rounded" style={{ backgroundColor: 'rgba(29,120,116,0.12)', color: 'var(--color-primary)' }}>Africa</span>
           </Link>
@@ -64,7 +64,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
       <div className="flex-1 flex flex-col min-w-0">
         <header className="md:hidden h-14 flex items-center justify-between px-4 border-b" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)' }}>
-          <Link to="/dashboard" className="font-bold text-base" style={{ color: 'var(--color-primary)' }}>StockFlow Africa</Link>
+          <Link to="/" className="font-bold text-base" style={{ color: 'var(--color-primary)' }}>StockFlow Africa</Link>
           <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 rounded-lg" aria-label={mobileOpen ? 'Close menu' : 'Open menu'}>
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
