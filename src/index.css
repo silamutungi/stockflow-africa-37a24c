@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary:          #1D7874;
+  --color-accent:           #E74C3C;
+  --color-bg:               #F9FDFB;
+  --color-bg-surface:       #FFFFFF;
+  --color-bg-muted:         #FFFFFF;
+  --color-text:             #0D1B1A;
+  --color-text-secondary:   rgba(13, 27, 26, 0.65);
+  --color-text-muted:       rgba(13, 27, 26, 0.65);
+  --color-border:           rgba(29, 120, 116, 0.12);
+  --color-accent-hover:     #E74C3C;
+  --color-success:          #16a34a;
+  --color-warning:          #d97706;
+  --color-error:            #dc2626;
+  --color-info:             #2563eb;
+  --font-primary:           'Inter', system-ui, sans-serif;
+  --font-mono:              'JetBrains Mono', 'Courier New', monospace;
+  --text-large-title:       2.125rem;
+  --text-title-1:           1.75rem;
+  --text-title-2:           1.375rem;
+  --text-title-3:           1.25rem;
+  --text-headline:          1.0625rem;
+  --text-body:              1.0625rem;
+  --text-callout:           1rem;
+  --text-subhead:           0.9375rem;
+  --text-footnote:          0.8125rem;
+  --text-caption:           0.75rem;
+  --weight-regular:         400;
+  --weight-medium:          500;
+  --weight-semibold:        600;
+  --weight-bold:            700;
+  --tracking-display:       0.012em;
+  --tracking-title:         0em;
+  --tracking-body:          -0.025em;
+  --tracking-caption:       0em;
+  --tracking-overline:      0.08em;
+  --leading-tight:          1.2;
+  --leading-normal:         1.3;
+  --leading-relaxed:        1.5;
+  --leading-loose:          1.6;
+
+  --background:             178 40% 98%;
+  --foreground:             178 40% 8%;
+  --card:                   0 0% 100%;
+  --card-foreground:        178 40% 8%;
+  --primary:                178 70% 28%;
+  --primary-foreground:     0 0% 100%;
+  --secondary:              178 20% 93%;
+  --secondary-foreground:   178 40% 15%;
+  --muted:                  178 15% 95%;
+  --muted-foreground:       178 20% 45%;
+  --accent:                 4 78% 56%;
+  --accent-foreground:      0 0% 100%;
+  --destructive:            0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border:                 178 30% 88%;
+  --input:                  178 30% 88%;
+  --ring:                   178 70% 28%;
+  --radius:                 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary:          #4ECDC4;
+    --color-accent:           #F39C12;
+    --color-bg:               #0D1B1A;
+    --color-bg-surface:       #1A2B2A;
+    --color-bg-muted:         #1A2B2A;
+    --color-text:             #F9FDFB;
+    --color-text-secondary:   rgba(249, 253, 251, 0.65);
+    --color-text-muted:       rgba(249, 253, 251, 0.65);
+    --color-border:           rgba(78, 205, 196, 0.15);
+    --color-accent-hover:     #F39C12;
+    --color-success:          #4ade80;
+    --color-warning:          #fbbf24;
+    --color-error:            #f87171;
+    --color-info:             #60a5fa;
+
+    --background:             178 40% 8%;
+    --foreground:             178 20% 97%;
+    --card:                   178 35% 13%;
+    --card-foreground:        178 20% 97%;
+    --primary:                178 55% 60%;
+    --primary-foreground:     178 40% 8%;
+    --secondary:              178 30% 18%;
+    --secondary-foreground:   178 20% 85%;
+    --muted:                  178 25% 16%;
+    --muted-foreground:       178 20% 60%;
+    --accent:                 38 92% 50%;
+    --accent-foreground:      178 40% 8%;
+    --destructive:            0 70% 65%;
+    --destructive-foreground: 0 0% 100%;
+    --border:                 178 30% 20%;
+    --input:                  178 30% 20%;
+    --ring:                   178 55% 60%;
+  }
+
+  img:not([src*=".svg"]) {
+    filter: brightness(0.9);
+  }
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+
+/* iOS Safari autofill override — injected by Sovereign pipeline */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #0e0d0b !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #0e0d0b inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
