@@ -75,13 +75,15 @@ export default function Navbar() {
       </div>
 
       {/* Mobile slide-in drawer overlay */}
-      {open && (
-        <div
-          className="fixed inset-0 z-40 md:hidden"
-          style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
-          aria-hidden="true"
-        />
-      )}
+      <div
+        className={[
+          'fixed inset-0 z-40 md:hidden transition-opacity duration-300',
+          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        ].join(' ')}
+        style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
+        aria-hidden="true"
+        onClick={() => setOpen(false)}
+      />
 
       {/* Mobile slide-in drawer — Paper background, Ink links, Flame active state */}
       <div
