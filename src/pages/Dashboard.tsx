@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { PlusCircle, AlertCircle, RefreshCw, Loader2, X } from 'lucide-react'
+import { PlusCircle, AlertCircle, RefreshCw, Loader2, X, DollarSign, Clock, CheckCircle2, TrendingUp } from 'lucide-react'
 
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
 import { formatCurrency, formatDate } from '../lib/utils'
@@ -184,89 +184,3 @@ export default function Dashboard() {
                 </div>
               )}
               <div className="flex gap-3 mt-5">
-                <Button onClick={handleSubmit} disabled={submitting} className="h-10 px-6 font-semibold" style={{ backgroundColor: 'var(--color-primary)', color: '#ffffff' }}>
-                  {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Submit request'}
-                </Button>
-                <Button variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        <Card>
-          <CardHeader className="pb-2">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg" style={{ color: 'var(--color-text)' }}>Financing Requests</CardTitle>
-              <button onClick={fetchRequests} className="p-2 rounded-lg hover:bg-muted" aria-label="Refresh">
-                <RefreshCw className="w-4 h-4" style={{ color: 'var(--color-text-secondary)' }} />
-              </button>
-            </div>
-          </CardHeader>
-          <CardContent className="p-0">
-            {loading && (
-              <div className="p-8 flex flex-col gap-3">
-                {[1,2,3].map(i => <div key={i} className="h-14 rounded-lg animate-pulse" style={{ backgroundColor: 'var(--color-border)' }} />)}
-              </div>
-            )}
-            {!loading && error && (
-              <div className="p-8 flex flex-col items-center gap-4">
-                <AlertCircle className="w-8 h-8" style={{ color: 'var(--color-error)' }} />
-                <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{error}</p>
-                <Button variant="outline" onClick={fetchRequests} className="h-9">Retry</Button>
-              </div>
-            )}
-            {!loading && !error && requests.length === 0 && (
-              <div className="p-12 flex flex-col items-center gap-4">
-                <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(29,120,116,0.10)' }}>
-                  <PlusCircle className="w-7 h-7" style={{ color: 'var(--color-primary)' }} />
-                </div>
-                <p className="font-semibold" style={{ color: 'var(--color-text)' }}>No financing requests yet</p>
-                <p className="text-sm text-center max-w-xs" style={{ color: 'var(--color-text-secondary)' }}>Submit your first supplier invoice to get funded in under 24 hours.</p>
-                <Button onClick={() => setShowForm(true)} className="h-10 px-5" style={{ backgroundColor: 'var(--color-primary)', color: '#ffffff' }}>New request</Button>
-              </div>
-            )}
-            {!loading && !error && requests.length > 0 && (
-              <div className="divide-y" style={{ borderColor: 'var(--color-border)' }}>
-                {requests.map(r => (
-                  <div key={r.id} className="flex items-center justify-between px-6 py-4 hover:bg-muted/40">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1">
-                        <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>{r.supplier_name}</span>
-                        <Badge variant={STATUS_COLORS[r.status] as 'default' | 'secondary' | 'destructive' | 'outline'}>{statusLabel(r.status)}</Badge>
-                        {r.delivery_confirmed && <Badge variant="outline" className="text-xs" style={{ color: 'var(--color-success)', borderColor: 'var(--color-success)' }}>Delivered</Badge>}
-                      </div>
-                      <div className="flex flex-wrap gap-x-4 gap-y-0.5">
-                        <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{r.invoice_number}</span>
-                        <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{r.purpose}</span>
-                        <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{formatDate(r.created_at)}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 ml-4">
-                      <div className="text-right">
-                        <p className="text-sm font-bold" style={{ color: 'var(--color-text)', fontVariantNumeric: 'tabular-nums' }}>{formatCurrency(r.amount, r.currency)}</p>
-                        <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{r.fee_percent}% fee</p>
-                      </div>
-                      {(r.status === 'draft' || r.status === 'pending') && (
-                        <button onClick={() => handleDelete(r.id)} className="p-2 rounded hover:bg-destructive/10" aria-label="Delete request">
-                          <X className="w-4 h-4" style={{ color: 'var(--color-error)' }} />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        <div className="mt-6 p-4 rounded-xl border" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg-surface)' }}>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--color-text-muted)' }}>Quick actions</p>
-          <div className="flex flex-wrap gap-3">
-            <Button onClick={() => setShowForm(true)} variant="outline" className="h-9 text-sm">Request financing</Button>
-            <Link to="/settings"><Button variant="outline" className="h-9 text-sm">Account settings</Button></Link>
-          </div>
-        </div>
-      </div>
-    </AppLayout>
-  )
-}
